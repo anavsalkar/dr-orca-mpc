@@ -95,7 +95,9 @@ class Agent:
                 
         
         opti.minimize(objective_sum)
-        opti.solver('ipopt')
+        opts = {}
+		opts["ipopt.linear_solver"] = 'ma27'
+        opti.solver("ipopt",opts)
         sol = opti.solve()
         if N >1:
             return sol.value(u)[[0],:].T
